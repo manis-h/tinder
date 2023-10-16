@@ -9,7 +9,7 @@ const Stack = createNativeStackNavigator();
 
 const ScreenNavigator = () => {
 
-    const user=true;
+    const user=false;
 
   return (
       <Stack.Navigator
@@ -18,7 +18,8 @@ const ScreenNavigator = () => {
       }}>
       {user?(
         <>
-      <Stack.Screen name="Home" component={HomeScreen} />
+        
+      <Stack.Screen name="Home" component={LoginScreen} />    
         <Stack.Screen name="Chat" component={ChatScreen} />
       </>
       ):
