@@ -1,27 +1,61 @@
 import React, { useState, useEffect } from 'react';
-import { Button, TextInput ,Alert } from 'react-native';
+import {
+  Button, TextInput, Alert,
+  // Text,
+  View
+} from 'react-native';
+import { Text } from 'galio-framework';
 import auth from '@react-native-firebase/auth';
 import loginByEmail from '../util/login/loginByEmail';
-import { logout } from '../util/login/loginByEmail';
+import useBearStore from '../store/zustandStore';
+import LogoutButton from '../components/LogoutButton';
 
-export default function PhoneSignIn() {
-  loginByEmail({
-    email: "mommyji@godess.com",
-    password: "pappa ji",
-    onSuccess: (s) => { Alert.alert(s) },
-    onError: (e) => { Alert.alert(e) },
-  });
+// function BearCounter() {
+//   const bears = useBearStore((state) => state.bears)
+//   return <Text>{bears} around here ...</Text>
+// }
+
+// function Controls() {
+//   const increasePopulation = useBearStore((state) => state.increasePopulation)
+//   return  <Button
+//       title="increase"
+//       onPress={increasePopulation}
+//     />
+// }
+
+function ShowLoginStatus() {
+  const isLoggedIn = useBearStore((state) => state.isLoggedIn)
+  return <Text h2>Am i Logged in ? {String(isLoggedIn)}</Text>
+}
+
+
+
+
+export default function LoginScreen() {
+  const setLoginState = useBearStore((state) => state.setLoginState);
+
+  function handleLogin() {
+  
+    loginByEmail({
+      email: "mommyji1@godess.com",
+      password: "pappa ji",
+      onSuccess: (s) => { Alert.alert(s) },
+      onError: (e) => { Alert.alert(e) },
+    });
+  }
+
 
   // Handle login
   function onAuthStateChanged(user) {
     if (user) {
-      console.log("Auth Success", user)
-      // Some Android devices can automatically process the verification code (OTP) message, and the user would NOT need to enter the code.
-      // Actually, if he/she tries to enter it, he/she will get an error message because the code was already used in the background.
-      // In this function, make sure you hide the component(s) for entering the code and/or navigate away from this screen.
+      // implement after login logic here
+      console.log("Auth Success", user);
+      setLoginState(true ,user);
       // It is also recommended to display a message to the user informing him/her that he/she has successfully logged in.
+      // Alert.alert("Welcome: you are signed in as",JSON.stringify(user))
     } else {
-      console.log("Auth Failed");
+      // do not do anything in here , use logout for loggedin state clearence
+      console.log("user cleared by logout or auth might have Failed");
     }
   }
 
@@ -29,14 +63,24 @@ export default function PhoneSignIn() {
     const subscriber = auth().onAuthStateChanged(onAuthStateChanged);
     return subscriber; // unsubscribe on unmount
   }, []);
+
  
-  return (<>
+ 
+  return (<View style={{
+    flex: 1,
+    backgroundColor:"black"
+  }}>
+    {/* <BearCounter />
+    <Controls /> */}
+    
+    <ShowLoginStatus/>
 
     <Button
-      title="logout"
-      onPress={() => logout()}
+      title="login"
+      onPress={handleLogin}
     />
-  </>
+  
+  </View>
   );
   
 }
