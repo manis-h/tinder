@@ -1,48 +1,26 @@
 import React, { useState, useEffect } from 'react';
 import {
-  Button, TextInput, Alert,
-  // Text,
-  View
+  Button, Alert,
+  View,
+  TouchableOpacity
 } from 'react-native';
 import { Text } from 'galio-framework';
 import auth from '@react-native-firebase/auth';
-import loginByEmail from '../util/login/loginByEmail';
 import useBearStore from '../store/zustandStore';
-import LogoutButton from '../components/LogoutButton';
+import SignInBox from '../components/SignInBox';
+import SignUpBox from '../components/SignUpBox';
 
-// function BearCounter() {
-//   const bears = useBearStore((state) => state.bears)
-//   return <Text>{bears} around here ...</Text>
-// }
-
-// function Controls() {
-//   const increasePopulation = useBearStore((state) => state.increasePopulation)
-//   return  <Button
-//       title="increase"
-//       onPress={increasePopulation}
-//     />
-// }
 
 function ShowLoginStatus() {
   const isLoggedIn = useBearStore((state) => state.isLoggedIn)
-  return <Text h2>Am i Logged in ? {String(isLoggedIn)}</Text>
+  return <Text h4>Am i Logged in ? {String(isLoggedIn)}</Text>
 }
-
 
 
 
 export default function LoginScreen() {
   const setLoginState = useBearStore((state) => state.setLoginState);
-
-  function handleLogin() {
-  
-    loginByEmail({
-      email: "mommyji1@godess.com",
-      password: "pappa ji",
-      onSuccess: (s) => { Alert.alert(s) },
-      onError: (e) => { Alert.alert(e) },
-    });
-  }
+  const [signInUpToggle, setSignInUpToggle] = useState(true);
 
 
   // Handle login
@@ -70,16 +48,18 @@ export default function LoginScreen() {
     flex: 1,
     backgroundColor:"black"
   }}>
-    {/* <BearCounter />
-    <Controls /> */}
-    
-    <ShowLoginStatus/>
+ 
+    {<Text h1>{signInUpToggle ? "SignUp":"SignIn" }</Text>}
+    {!signInUpToggle ? <SignInBox /> : <SignUpBox />}
 
-    <Button
-      title="login"
-      onPress={handleLogin}
-    />
-  
+    <View style={{ position: "absolute", bottom: 0 }}>
+    <ShowLoginStatus />
+    </View>
+    
+    <TouchableOpacity onPress={()=>setSignInUpToggle(!signInUpToggle)}>
+        {<Text h5>{signInUpToggle ? "Already Signed Up?":"Need to Sign Up?" }</Text>}
+    </TouchableOpacity>
+
   </View>
   );
   

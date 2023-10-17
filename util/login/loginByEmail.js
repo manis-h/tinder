@@ -17,17 +17,20 @@ export default LoginWithEmail = ({ email, password, onSuccess = (s) => console.l
           onSuccess('User signed in Successfully!')
       })
       .catch(error => {
-        // if (error.code === 'auth/email-already-in-use') {
-        //     console.log('That email address is already in use!');
-        //     onError('That email address is already in use!')
-        // }
+     
+        if (error.code === 'auth/invalid-login') {
+            console.log('INVALID_LOGIN_CREDENTIALS!');
+            return onError('login credentials are invalid!')
+        }
     
         if (error.code === 'auth/invalid-email') {
             console.log('That email address is invalid!');
-            onError('That email address is invalid!')
+            return onError('That email address is invalid!')
         }
     
         console.error(error);
+        return onError(error.message)
+
       });
 } 
 
@@ -44,15 +47,19 @@ const signUpWithEmail = ({ email, password, onSuccess = (s) => console.log({ def
       .catch(error => {
         if (error.code === 'auth/email-already-in-use') {
             console.log('That email address is already in use!');
-            onError('That email address is already in use!')
+            return onError('That email address is already in use!')
+        }
+        if (error.code === 'auth/weak-password') {
+            console.log('auth/weak-password!');
+            return onError('Try using a Stronger password my friend!')
         }
     
         if (error.code === 'auth/invalid-email') {
             console.log('That email address is invalid!');
-            onError('That email address is invalid!')
+            return onError('That email address is invalid!')
         }
-    
         console.error(error);
+        return onError(error.message)
       });
 } 
 
