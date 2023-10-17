@@ -10,9 +10,10 @@ import {
   Image
 } from 'react-native';
 import Swiper from 'react-native-deck-swiper'
-
+import firestore from '@react-native-firebase/firestore';
 
 function HomeScreen({ navigation }: any): JSX.Element {
+  const usersCollection = firestore().collection('users');
 
   const DUMMY_DATA = [
     {firstName: "Sonny",

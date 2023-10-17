@@ -1,7 +1,8 @@
 
 import { useNavigation } from '@react-navigation/core';
-import React,{useLayoutEffect, useState} from 'react';
+import React,{useEffect, useLayoutEffect, useState} from 'react';
 import type { PropsWithChildren } from 'react';
+import firestore from '@react-native-firebase/firestore';
 import {
     StyleSheet,
     Text,
@@ -21,7 +22,10 @@ function LoginScreen(): JSX.Element {
     const navigation=useNavigation()
     const [date, setDate] = useState(new Date())
     const [open, setOpen] = useState(false)
-  
+    const usersCollection = firestore().collection('users');
+  useEffect(()=>{
+console.log({usersCollection})
+  },[usersCollection])
     useLayoutEffect(()=>{
        navigation.setOptions({
         headerShown:false,

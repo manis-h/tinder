@@ -12,6 +12,10 @@
   "dependencies": {
     "@ant-design/react-native": "^5.0.4",
     "@expo/vector-icons": "^13.0.0",
+    "@firebase/database": "^1.0.1",
+    "@firebase/firestore": "^4.3.0",
+    "@react-native-firebase/app": "^18.5.0",
+    "@react-native-firebase/firestore": "^18.5.0",
     "@react-navigation/native": "^6.1.8",
     "@react-navigation/native-stack": "^6.9.14",
     "antd": "^5.10.1",
