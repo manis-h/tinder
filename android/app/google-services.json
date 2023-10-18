@@ -1,13 +1,13 @@
 {
   "project_info": {
-    "project_number": "442883853559",
-    "project_id": "trioangle-17718",
-    "storage_bucket": "trioangle-17718.appspot.com"
+    "project_number": "380493350033",
+    "project_id": "freelancetinder-7bef6",
+    "storage_bucket": "freelancetinder-7bef6.appspot.com"
   },
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:442883853559:android:8fa7dd8ae9107a7c5997f2",
+        "mobilesdk_app_id": "1:380493350033:android:54ec1a992c16680c97ab30",
         "android_client_info": {
           "package_name": "com.tinder"
         }
@@ -15,7 +15,7 @@
       "oauth_client": [],
       "api_key": [
         {
-          "current_key": "AIzaSyBGPoXHfYJUfRE-sfnLYQSITdofORAGzUg"
+          "current_key": "AIzaSyD0-Rkv6goREgtxkjbXQ_if0ABWSFt6PzY"
         }
       ],
       "services": {
