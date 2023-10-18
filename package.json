@@ -10,7 +10,6 @@
     "test": "jest"
   },
   "dependencies": {
-    "@ant-design/react-native": "^5.0.4",
     "@expo/vector-icons": "^13.0.0",
     "@firebase/database": "^1.0.1",
     "@firebase/firestore": "^4.3.0",
