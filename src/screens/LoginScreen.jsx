@@ -1,7 +1,7 @@
 
 import { useNavigation } from '@react-navigation/core';
 import React,{useEffect, useLayoutEffect, useState} from 'react';
-import type { PropsWithChildren } from 'react';
+// import type { PropsWithChildren } from 'react';
 import database from '@react-native-firebase/database';
 import {
     StyleSheet,
@@ -19,7 +19,7 @@ import DatePicker from 'react-native-date-picker';
 
 
 
-function LoginScreen(): JSX.Element {
+function LoginScreen() {
 const handleLogin=()=>{
 
 }
@@ -77,7 +77,7 @@ useEffect(()=>{
    <DatePicker style={{marginVertical:5, backgroundColor:'white',alignItems:'center'}} mode='date' date={date} onDateChange={setDate} />
    {/* <TouchableOpacity style={{}}>Submit</TouchableOpacity> */}
                     
-                <TouchableOpacity onPress={()=>Alert.alert(`Welcome Aboard ${name}`)} style={{width:'100%' ,alignItems:'center', padding:10,opacity:1, backgroundColor:'#fff' ,borderWidth:1,borderRadius:10}}>
+                <TouchableOpacity onPress={()=>{Alert.alert(`Welcome Aboard ${name} Lets Start Swiping`), navigation.navigate('Home')}} style={{width:'100%' ,alignItems:'center', padding:10,opacity:1, backgroundColor:'#fff' ,borderWidth:1,borderRadius:10}}>
                     <Text >Register</Text>
                 </TouchableOpacity>
                     </View>
