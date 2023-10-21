@@ -1,8 +1,8 @@
 
 import { useNavigation } from '@react-navigation/core';
 import React,{useEffect, useLayoutEffect, useState} from 'react';
-import type { PropsWithChildren } from 'react';
-import firestore from '@react-native-firebase/firestore';
+// import type { PropsWithChildren } from 'react';
+import database from '@react-native-firebase/database';
 import {
     StyleSheet,
     Text,
@@ -15,17 +15,36 @@ import {
     Modal
 } from 'react-native';
 import DatePicker from 'react-native-date-picker';
+// import firestore from '@react-native-firebase/firestore';
 
 
 
-function LoginScreen(): JSX.Element {
+function LoginScreen() {
+const handleLogin=()=>{
+
+}
+    const fetchDetails = async () =>{
+console.log("HI")
+    // const usersCollection = await firestore().collection('users').doc('86f5BKHtLyeTCg0DbTfS').get();
+    // console.log(usersCollection)
+try{
+
+    const data = await database().ref('users/1').once('value')
+
+    console.log(data.val())
+}
+catch(err){
+    console.log(err)
+}
+}
+useEffect(()=>{
+    
+    fetchDetails()
+    },[])
     const navigation=useNavigation()
     const [date, setDate] = useState(new Date())
     const [open, setOpen] = useState(false)
-    const usersCollection = firestore().collection('users');
-  useEffect(()=>{
-console.log({usersCollection})
-  },[usersCollection])
+    
     useLayoutEffect(()=>{
        navigation.setOptions({
         headerShown:false,
@@ -58,7 +77,7 @@ console.log({usersCollection})
    <DatePicker style={{marginVertical:5, backgroundColor:'white',alignItems:'center'}} mode='date' date={date} onDateChange={setDate} />
    {/* <TouchableOpacity style={{}}>Submit</TouchableOpacity> */}
                     
-                <TouchableOpacity onPress={()=>Alert.alert(`Welcome Aboard ${name}`)} style={{width:'100%' ,alignItems:'center', padding:10,opacity:1, backgroundColor:'#fff' ,borderWidth:1,borderRadius:10}}>
+                <TouchableOpacity onPress={()=>{Alert.alert(`Welcome Aboard ${name} Lets Start Swiping`), navigation.navigate('Home')}} style={{width:'100%' ,alignItems:'center', padding:10,opacity:1, backgroundColor:'#fff' ,borderWidth:1,borderRadius:10}}>
                     <Text >Register</Text>
                 </TouchableOpacity>
                     </View>
