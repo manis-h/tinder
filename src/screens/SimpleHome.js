@@ -3,8 +3,8 @@ import {
 } from 'react-native';
 import { Text } from 'galio-framework'
 
-import LogoutButton from '../components/LogoutButton';
-import useBearStore from '../store/zustandStore';
+import LogoutButton from '../../components/LogoutButton';
+import useBearStore from '../../store/zustandStore';
 
 function ShowUserProfile() {
   const userProfile = useBearStore((state) => state.userProfile)

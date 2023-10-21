@@ -6,9 +6,9 @@ import {
 } from 'react-native';
 import { Text } from 'galio-framework';
 import auth from '@react-native-firebase/auth';
-import useBearStore from '../store/zustandStore';
-import SignInBox from '../components/SignInBox';
-import SignUpBox from '../components/SignUpBox';
+import useBearStore from '../../store/zustandStore';
+import SignInBox from '../../components/SignInBox';
+import SignUpBox from '../../components/SignUpBox';
 
 
 function ShowLoginStatus() {
