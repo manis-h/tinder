@@ -11,7 +11,7 @@ import {ActivityIndicator, Divider} from 'react-native-paper';
 import {default as MatchSwiper} from './MatchSwiper';
 import auth from '@react-native-firebase/auth';
 
-function ShowAuthInfo() {
+export function ShowAuthInfo() {
   const user = auth().currentUser;
   // console.log('ShowAuthInfo', { user });
 
@@ -59,7 +59,7 @@ function ShowAuthInfo() {
   );
 }
 
-function ShowMySocialProfile() {
+export function ShowMySocialProfile() {
   const [myProfile, setMyProfile] = useState(null);
   // const user = auth().currentUser;
   const {uid} = auth().currentUser;
@@ -96,7 +96,7 @@ function ShowMySocialProfile() {
   );
 }
 
-async function updateCreateProfile(uid, name = 'wolfieeeee', age = 28) {
+export async function updateCreateProfile(uid, name = 'wolfieeeee', age = 28) {
   if (!uid) return Alert.alert('need uid');
   if (!name) return Alert.alert('need name');
   if (!age) return Alert.alert('need age');

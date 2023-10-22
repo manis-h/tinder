@@ -136,6 +136,17 @@ async function matchAccept(otherUid) {
 
 export default MatchSwiper = () => {
   const [loading, allUsers] = useGetAllUserFeed();
+  const [swipeLeftList, setSwipeLeftList] = useState([]);
+  const [swipeRightList, setSwipeRightList] = useState([]);
+
+  function handleSwipeLeft(uid) {
+    setSwipeLeftList(st => [...st, uid]);
+  }
+  async function handleSwipeRight(uid) {
+    // ArrayUnion(uid);
+    await matchAccept(uid);
+    setSwipeRightList(uid);
+  }
 
   return (
     <ScrollView
@@ -147,31 +158,50 @@ export default MatchSwiper = () => {
       }}>
       {loading && <ActivityIndicator />}
 
-      {allUsers.map(user => {
-        return (
-          <Pressable
-            key={user.id}
-            onPress={() => {
-              // ArrayUnion(user.id);
-              matchAccept(user.id);
-            }}
-            style={{marginVertical: 5}}>
-            <View
-              style={{flexDirection: 'row', justifyContent: 'space-between'}}>
-              <View>
-                <Text h5>{user.name}</Text>
+      {allUsers
+        .filter(
+          user =>
+            !(
+              swipeLeftList.includes(user.id) ||
+              swipeRightList.includes(user.id)
+            ),
+        )
+        .map(user => {
+          return (
+            <View key={user.id} style={{marginVertical: 5}}>
+              <View
+                style={{flexDirection: 'row', justifyContent: 'space-between'}}>
+                <View>
+                  <Text h5>{user.name}</Text>
+                </View>
+                <View>
+                  <Text h5>{user.id}</Text>
+                </View>
               </View>
               <View>
-                <Text h5>{user.id}</Text>
+                <Text>{JSON.stringify(user)}</Text>
               </View>
+              <View
+                style={{flexDirection: 'row', justifyContent: 'space-between'}}>
+                <View>
+                  <Button
+                    title="accept"
+                    color={'green'}
+                    onPress={() => handleSwipeRight(user.id)}
+                  />
+                </View>
+                <View>
+                  <Button
+                    title="reject"
+                    color={'red'}
+                    onPress={() => handleSwipeLeft(user.id)}
+                  />
+                </View>
+              </View>
+              <Divider />
             </View>
-            <View>
-              <Text>{JSON.stringify(user)}</Text>
-            </View>
-            <Divider />
-          </Pressable>
-        );
-      })}
+          );
+        })}
     </ScrollView>
   );
 };
