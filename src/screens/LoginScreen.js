@@ -9,6 +9,7 @@ import auth from '@react-native-firebase/auth';
 import useBearStore from '../../store/zustandStore';
 import SignInBox from '../../components/SignInBox';
 import SignUpBox from '../../components/SignUpBox';
+import SignUp from './SignUp';
 
 
 function ShowLoginStatus() {
@@ -50,15 +51,15 @@ export default function LoginScreen() {
   }}>
  
     {<Text h1>{signInUpToggle ? "SignUp":"SignIn" }</Text>}
-    {!signInUpToggle ? <SignInBox /> : <SignUpBox />}
+    {!signInUpToggle ? <SignInBox setSignInUpToggle={setSignInUpToggle} signInUpToggle={setSignInUpToggle} /> : <SignUp setSignInUpToggle={setSignInUpToggle} signInUpToggle={setSignInUpToggle} />}
 
     <View style={{ position: "absolute", bottom: 0 }}>
-    <ShowLoginStatus />
+    {/* <ShowLoginStatus /> */}
     </View>
     
-    <TouchableOpacity onPress={()=>setSignInUpToggle(!signInUpToggle)}>
+    {/* <TouchableOpacity onPress={()=>setSignInUpToggle(!signInUpToggle)}>
         {<Text h5>{signInUpToggle ? "Already Signed Up?":"Need to Sign Up?" }</Text>}
-    </TouchableOpacity>
+    </TouchableOpacity> */}
 
   </View>
   );

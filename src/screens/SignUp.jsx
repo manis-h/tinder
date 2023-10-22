@@ -17,9 +17,10 @@ import {
 import DatePicker from 'react-native-date-picker';
 // import firestore from '@react-native-firebase/firestore';
 
+import { signUpWithEmail } from '../../util/login/loginByEmail';
 
 
-function LoginScreen() {
+function SignUp({setSignInUpToggle,signInUpToggle}) {
 const handleLogin=()=>{
 
 }
@@ -53,6 +54,19 @@ useEffect(()=>{
     const [name,setName]=useState('')
 
     const [modalVisible, setModalVisible] = useState(false);
+    const [email, setEmail] = useState(null);
+  const [pass, setPass] = useState(null);
+
+  function onSubmit() {
+    if (!email || !pass) return;
+    signUpWithEmail({
+      email: email,
+      password: pass,
+      onSuccess: (s) => { Alert.alert(s) },
+      onError: (e) => { Alert.alert(e) },
+    });
+  }
+
     return (
         <View style={styles.flexScreen}>
             <ImageBackground
@@ -72,16 +86,26 @@ useEffect(()=>{
     borderColor: '#fff' }} placeholder='Your Name' onChangeText={newText => setName(newText)} value={name}/> 
                         <TextInput style={{marginVertical:10 ,backgroundColor:'white' , borderRadius: 10,
     borderWidth: 1,
-    borderColor: '#fff' }} placeholder='Your Number'/> 
+    borderColor: '#fff' }}  onChangeText={(s) => setEmail(s)} placeholder='Your Email'/>
+          <TextInput style={{marginVertical:10 ,backgroundColor:'white' , borderRadius: 10,
+    borderWidth: 1,
+    borderColor: '#fff' }}placeholder='password'   autoCapitalize='none'
+      
+    onChangeText={(s)=>setPass(s)}/> 
     <Text style={{textAlign:'center', backgroundColor:'white', marginVertical:5}}>Your Date of Birth</Text>
    <DatePicker style={{marginVertical:5, backgroundColor:'white',alignItems:'center'}} mode='date' date={date} onDateChange={setDate} />
    {/* <TouchableOpacity style={{}}>Submit</TouchableOpacity> */}
                     
-                <TouchableOpacity onPress={()=>{Alert.alert(`Welcome Aboard ${name} Lets Start Swiping`), navigation.navigate('Home')}} style={{width:'100%' ,alignItems:'center', padding:10,opacity:1, backgroundColor:'#fff' ,borderWidth:1,borderRadius:10}}>
+                <TouchableOpacity onPress={()=>{Alert.alert(`Welcome Aboard ${name} Lets Start Swiping` ),onSubmit(), navigation.navigate('Home')}} style={{width:'100%' ,alignItems:'center', padding:10,opacity:1, backgroundColor:'#fff' ,borderWidth:1,borderRadius:10}}>
                     <Text >Register</Text>
                 </TouchableOpacity>
+                <TouchableOpacity onPress={()=>setSignInUpToggle(!signInUpToggle)}>
+        {<Text style={{fontSize:40}} h5>{signInUpToggle ? "Already Signed Up ?":"Need to Sign Up?" }</Text>}
+        <Text>Click Here</Text>
+    </TouchableOpacity>
                     </View>
  
+                   
             </ImageBackground>
             <Modal style={{backgroundColor:'white', opacity:0}}
         animationType="slide"
@@ -121,4 +145,4 @@ const styles = StyleSheet.create({
 });
 
 
-export default LoginScreen;
+export default SignUp;

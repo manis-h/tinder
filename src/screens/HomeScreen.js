@@ -8,7 +8,10 @@ const images=[
   'https://images.pexels.com/photos/1485031/pexels-photo-1485031.jpeg?cs=srgb&dl=pexels-harsh-raj-gond-1485031.jpg&fm=jpg',
 'https://images.pexels.com/photos/1839963/pexels-photo-1839963.jpeg?cs=srgb&dl=pexels-abir-hasan-1839963.jpg&fm=jpg',
 'https://images.pexels.com/photos/1689731/pexels-photo-1689731.jpeg?cs=srgb&dl=pexels-harsh-kushwaha-1689731.jpg&fm=jpg',
-'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTjnmKsludJOKo2ikxJFgWaOJJG-hbmQ42v2TnMUrafvw1xwQ-xcjvJGV3DEgMIHH1HDc0&usqp=CAU'
+'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTjnmKsludJOKo2ikxJFgWaOJJG-hbmQ42v2TnMUrafvw1xwQ-xcjvJGV3DEgMIHH1HDc0&usqp=CAU',
+'https://models.bestmodelsagency.com/recursos/clientes/F31110A5-6133-4F2E-96A8-927FA9485371/list.jpg?v1589811317?202203111855',
+'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSyORouhNMJk4jyL6HEWCN6bZQRrHpzGQ_sMycyMPfQkNBXvSGNXejS53ccg-FZ8cEjuoo&usqp=CAU',
+'https://photos.modelmayhem.com/avatars/3/0/8/7/6/9/7/5204f4d202e2d_m.jpg'
 ]
 
 const Home = () => {
@@ -25,6 +28,21 @@ const Home = () => {
                 return (
                     <View style={styles.card}>
                         <Text style={styles.text}>{card}</Text>
+                        
+        <Pressable   style={{position:'absolute',bottom:10 ,marginHorizontal:40, backgroundColor:'transparent',flex:1,flexDirection:'row', justifyContent:'space-between' }}
+                onPress={() => {console.log('oulala')}}
+                title="Press me">
+                <Icon.Button   size={50} name="heart-circle"  style={{backgroundColor:'transparent',}} >
+    
+  </Icon.Button>
+  
+            </Pressable>
+            <Pressable  style={{position:'absolute',bottom:10 ,paddingHorizontal:35, backgroundColor:'transparent',flex:1,flexDirection:'row', alignSelf:'flex-end'}}>
+  <Entypo.Button  size={50} name="circle-with-cross"  style={{backgroundColor:'transparent',}} >
+    
+    </Entypo.Button>
+    </Pressable>          
+
                     </View>
                 )
             }}
@@ -35,19 +53,6 @@ const Home = () => {
             stackSize= {2}>
             
         </Swiper>
-        <Pressable   style={{position:'absolute',bottom:80 ,marginHorizontal:40, backgroundColor:'transparent',flex:1,flexDirection:'row', justifyContent:'space-between' }}
-                onPress={() => {console.log('oulala')}}
-                title="Press me">
-                <Icon.Button   size={50} name="heart-circle"  style={{backgroundColor:'transparent',}} >
-    
-  </Icon.Button>
-  
-            </Pressable>
-  <Pressable  style={{position:'absolute',bottom:80 ,paddingHorizontal:35, backgroundColor:'transparent',flex:1,flexDirection:'row', alignSelf:'flex-end'}}>
-  <Entypo.Button  size={50} name="circle-with-cross"  style={{backgroundColor:'transparent',}} >
-    
-    </Entypo.Button>
-    </Pressable>          
     </View>
 
     
