@@ -21,8 +21,8 @@ const ScreenNavigator = () => {
       {isLoggedIn?(
         <Stack.Group>
     
-      <Stack.Screen name="Home" component={HomeScreen} />    
       <Stack.Screen name="HomeTest" component={SimpleHome} />    
+      <Stack.Screen name="Home" component={HomeScreen} />    
         <Stack.Screen name="Chat" component={ChatScreen} />
       </Stack.Group>
       ):
