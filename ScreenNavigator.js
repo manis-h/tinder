@@ -1,5 +1,5 @@
-import React from 'react'
-import { createNativeStackNavigator } from '@react-navigation/native-stack';
+import React from 'react';
+import {createNativeStackNavigator} from '@react-navigation/native-stack';
 import HomeScreen from './src/screens/HomeScreen';
 import ChatScreen from './src/screens/ChatScreen.tsx';
 import LoginScreen from './src/screens/LoginScreen';
@@ -10,32 +10,29 @@ import Editprofile from './src/screens/Editprofile';
 
 const Stack = createNativeStackNavigator();
 
-
 const ScreenNavigator = () => {
-    // isAuthenticated Flag - true means user logged in
-  const isLoggedIn = useBearStore((state) => state.isLoggedIn);
+  // isAuthenticated Flag - true means user logged in
+  const isLoggedIn = useBearStore(state => state.isLoggedIn);
 
   return (
-      <Stack.Navigator
+    <Stack.Navigator
       screenOptions={{
-        headerShown:false,
+        headerShown: false,
       }}>
-      {isLoggedIn?(
+      {isLoggedIn ? (
         <Stack.Group>
-      <Stack.Screen name="Profile" component={Profile} />    
-        <Stack.Screen name="Home" component={HomeScreen} />    
-      <Stack.Screen name="HomeTest" component={SimpleHome} />    
-          
-    <Stack.Screen name='EditProfile' component={Editprofile}/>
-        <Stack.Screen name="Chat" component={ChatScreen} />
-      </Stack.Group>
-      ):
-      (
-      <Stack.Screen name="Login" component={LoginScreen} />
-        )
-      }
-    </Stack.Navigator>
-  )
-}
+          <Stack.Screen name="Home" component={HomeScreen} />
+          <Stack.Screen name="Profile" component={Profile} />
+          <Stack.Screen name="HomeTest" component={SimpleHome} />
 
-export default ScreenNavigator
+          <Stack.Screen name="EditProfile" component={Editprofile} />
+          <Stack.Screen name="Chat" component={ChatScreen} />
+        </Stack.Group>
+      ) : (
+        <Stack.Screen name="Login" component={LoginScreen} />
+      )}
+    </Stack.Navigator>
+  );
+};
+
+export default ScreenNavigator;

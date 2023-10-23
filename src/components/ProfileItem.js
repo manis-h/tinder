@@ -1,8 +1,8 @@
 import React from 'react';
 import styles from '../../assets/styles';
 
-import { Text, View } from 'react-native';
-import Icon from 'react-native-vector-icons/AntDesign' ;
+import {Text, View} from 'react-native';
+import Icon from 'react-native-vector-icons/AntDesign';
 
 const ProfileItem = ({
   age,
@@ -12,7 +12,10 @@ const ProfileItem = ({
   info4,
   location,
   matches,
-  name
+  name,
+  proffession,
+  intrests,
+  bio,
 }) => {
   return (
     <View style={styles.containerProfileItem}>
@@ -30,23 +33,23 @@ const ProfileItem = ({
 
       <View style={styles.info}>
         <Text style={styles.iconProfile}>
-          <Icon name="user" />
+          <Icon name="iconfontdesktop" />
         </Text>
-        <Text style={styles.infoContent}>{info1}</Text>
+        <Text style={styles.infoContent}>{proffession}</Text>
       </View>
 
       <View style={styles.info}>
         <Text style={styles.iconProfile}>
           <Icon name="profile" />
         </Text>
-        <Text style={styles.infoContent}>{info2}</Text>
+        <Text style={styles.infoContent}>{intrests}</Text>
       </View>
 
       <View style={styles.info}>
         <Text style={styles.iconProfile}>
           <Icon name="edit" />
         </Text>
-        <Text style={styles.infoContent}>{info3}</Text>
+        <Text style={styles.infoContent}>{bio}</Text>
       </View>
 
       {/* <View style={styles.info}>

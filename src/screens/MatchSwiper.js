@@ -58,9 +58,11 @@ export const useGetAllUserFeed = () => {
   return [loading, allUsers];
 };
 
-async function matchAccept(otherUid) {
-  const {uid: myUid} = auth().currentUser;
+export async function matchAccept(otherUid) {
+  console.log('matchAcceptRun', otherUid);
 
+  const {uid: myUid} = auth().currentUser;
+  console.log({myUid});
   if (!otherUid) return Alert.alert('need other person uid');
   if (!myUid) return Alert.alert('need myProfile uid');
 
