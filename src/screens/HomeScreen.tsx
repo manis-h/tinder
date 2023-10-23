@@ -15,28 +15,7 @@ import firestore from '@react-native-firebase/firestore';
 function HomeScreen({ navigation }: any): JSX.Element {
   const usersCollection = firestore().collection('users');
 
-  const DUMMY_DATA = [
-    {firstName: "Sonny",
-    lastName: "Sangha",
-    occupation: "Software Developer",
-    photoURL: "https://avatars.githubusercontent.com/u/24712956?v=4",
-    age: 27,
-    },
-    {firstName: "Elon",
-    lastName: "Musk",
-    occupation: "Software Developer",
-    photoURL:"https://www.biography.com/.image/ar 1:1%2Cc_fill%2Ccs_srgb%2Cfl progressive%2Cq_auto:good%2Cw_1200/MTc50TK20DUyMTMxNzM00Dcy/gettyimages-1229892983-square.jpg",
-    age: 40,
-    },
-    {
-    firstName: "Sonny",
-    lastName: "Sangha",
-    occupation: "Software Developer",
-    photoURL:
-    "https://www.biography.com/.image/ar_1:1%2Cc_fill%2Ccs_srgb%2Cfl_progressive%2Cq_auto:good%2Cw_1200/MTc50TK20DUyMTMxNzM00Dcy/gettyimages-1229892983-square.jpg",
-    age: 21,
-    },
-    ];
+
 
 
 
@@ -75,6 +54,7 @@ function HomeScreen({ navigation }: any): JSX.Element {
           <Image style={styles.MessageIcon} source={require('../icons/message.png')}></Image>
         </TouchableOpacity>
       </View>
+      
       {/* {End OF Header} */}
 
 

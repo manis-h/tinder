@@ -8,12 +8,17 @@ import {
   Pressable,
   Image,
   Alert,
+  TouchableOpacity,
 } from 'react-native';
 import Icon from 'react-native-vector-icons/Ionicons';
 import Entypo from 'react-native-vector-icons/Entypo';
 
 import Swiper from 'react-native-deck-swiper';
 import {matchAccept, useGetAllUserFeed} from './MatchSwiper';
+import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
+import {useNavigation} from '@react-navigation/native';
+const Tab = createBottomTabNavigator();
+
 const images = [
   'https://images.pexels.com/photos/1485031/pexels-photo-1485031.jpeg?cs=srgb&dl=pexels-harsh-raj-gond-1485031.jpg&fm=jpg',
   'https://images.pexels.com/photos/1839963/pexels-photo-1839963.jpeg?cs=srgb&dl=pexels-abir-hasan-1839963.jpg&fm=jpg',
@@ -34,124 +39,123 @@ const Home = () => {
     setSwipeLeftList(st => [...st, uid]);
   }
   async function handleSwipeRight(uid) {
-    // ArrayUnion(uid);
     await matchAccept(uid);
     setSwipeRightList(uid);
   }
-  console.log({allUsers});
-
+  const navigation = useNavigation();
   return (
-    <View style={styles.container}>
-      <Swiper
-        cards={allUsers}
-        renderCard={(i, index) => {
-          return (
-            <View style={styles.card}>
-              <Text style={styles.text}>
-                {i?.name}, <Text style={{fontSize: 30}}>{i?.age}</Text>
-              </Text>
-
-              <Image
-                style={{aspectRatio: '2/3'}}
-                height={500}
-                source={{uri: images[index]}}
-              />
-              <Text>{JSON.stringify(i)}</Text>
-              <Pressable
-                style={{
-                  position: 'absolute',
-                  bottom: 10,
-                  marginHorizontal: 40,
-                  backgroundColor: 'transparent',
-                  flex: 1,
-                  flexDirection: 'row',
-                  justifyContent: 'space-between',
-                }}
-                onPress={() => {
-                  console.log('oulala');
-                }}
-                title="Press me">
-                <Icon
-                  size={70}
-                  color={'red'}
-                  name="heart-circle"
-                  style={{backgroundColor: 'transparent'}}></Icon>
-              </Pressable>
-              <Pressable
-                style={{
-                  position: 'absolute',
-                  bottom: 10,
-                  paddingHorizontal: 35,
-                  backgroundColor: 'transparent',
-                  flex: 1,
-                  flexDirection: 'row',
-                  alignSelf: 'flex-end',
-                }}>
-                <Entypo
-                  color={'red'}
-                  size={70}
-                  name="circle-with-cross"
-                  style={{backgroundColor: 'transparent'}}></Entypo>
-              </Pressable>
-            </View>
-          );
-        }}
-        onSwipedLeft={() => {
-          console.log('Left swipe'), Alert.alert(`Left Swipe`);
-        }}
-        onSwipedRight={i => {
-          console.log(allUsers[i]);
-          console.log('Rightr swipe', allUsers[i]?.uid),
-            handleSwipeRight(allUsers[i]?.uid),
+    <View>
+      <TouchableOpacity onPress={() => navigation.navigate('Profile')}>
+        <Entypo
+          name="user"
+          style={{
+            marginBottom: -20,
+            padding: 20,
+            alignSelf: 'flex-end',
+            // flex: 1,
+            flexDirection: 'row',
+            alignItems: 'flex-end',
+          }}
+          size={40}
+        />
+      </TouchableOpacity>
+      <View style={styles.container}>
+        <Swiper
+          cards={allUsers}
+          renderCard={(i, index) => {
+            return (
+              <>
+                <View style={styles.card}>
+                  <Image
+                    style={styles.cardImage}
+                    source={{uri: images[index]}}
+                  />
+                  <Text style={styles.cardText}>
+                    {i?.name}, {i?.age}
+                  </Text>
+                  <View style={styles.cardActions}>
+                    <Pressable
+                      style={styles.likeButton}
+                      onPress={() => {
+                        console.log('Liked');
+                      }}>
+                      <Icon name="heart-circle" size={60} color="red" />
+                    </Pressable>
+                    <Pressable
+                      style={styles.dislikeButton}
+                      onPress={() => {
+                        console.log('Disliked');
+                      }}>
+                      <Entypo name="circle-with-cross" size={60} color="red" />
+                    </Pressable>
+                  </View>
+                </View>
+              </>
+            );
+          }}
+          onSwipedLeft={() => {
+            console.log('Left swipe');
+            Alert.alert(`Left Swipe`);
+          }}
+          onSwipedRight={i => {
+            console.log(allUsers[i]);
+            console.log('Right swipe', allUsers[i]?.uid);
+            // handleSwipeRight(allUsers[i]?.uid);
             Alert.alert(`Right Swipe`);
-        }}
-        onSwiped={cardIndex => {
-          console.log(cardIndex);
-        }}
-        onSwipedAll={() => {
-          console.log('onSwipedAll');
-        }}
-        cardIndex={2}
-        backgroundColor={'#4FD0E9'}
-        stackSize={2}></Swiper>
+          }}
+          onSwiped={cardIndex => {
+            console.log(cardIndex);
+          }}
+          onSwipedAll={() => {
+            console.log('onSwipedAll');
+          }}
+          cardIndex={2}
+          backgroundColor="#4FD0E9"
+          stackSize={2}></Swiper>
+      </View>
     </View>
   );
 };
+
 const styles = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: '#F5FCFF',
+    justifyContent: 'center',
+    alignItems: 'center',
   },
   card: {
-    aspectRatio: '1/2',
-    flex: 1,
+    width: '100%',
+    height: '90%',
     borderRadius: 10,
-    borderWidth: 2,
+    borderWidth: 1,
     borderColor: '#E8E8E8',
-    justifyContent: 'center',
     backgroundColor: 'white',
     overflow: 'hidden',
   },
-  text: {
-    textAlign: 'center',
-    fontSize: 40,
-    backgroundColor: 'transparent',
-  },
-  bgImageWrapper: {
-    position: 'absolute',
-    top: 0,
-    bottom: 0,
-    left: 0,
-    right: 0,
-  },
-  bgImage: {
+  cardImage: {
     flex: 1,
-    resizeMode: 'stretch',
   },
-  welcome: {
-    fontSize: 20,
+  cardText: {
+    fontSize: 24,
     textAlign: 'center',
-    margin: 10,
+    padding: 10,
+  },
+  cardActions: {
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    padding: 10,
+  },
+  likeButton: {
+    backgroundColor: 'transparent',
+    padding: 10,
+    borderRadius: 50,
+  },
+  dislikeButton: {
+    backgroundColor: 'transparent',
+    padding: 10,
+    borderRadius: 50,
   },
 });
+
 export default Home;

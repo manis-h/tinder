@@ -1,11 +1,11 @@
 import React, {useState, useEffect} from 'react';
-import {StyleSheet, View} from 'react-native';
+import {StyleSheet, TouchableOpacity, View} from 'react-native';
 import {Button, SegmentedButtons, Text, TextInput} from 'react-native-paper';
 import useBearStore from '../../store/zustandStore';
 import auth from '@react-native-firebase/auth';
 import SimpleHome, {updateCreateProfile} from './SimpleHome';
 import {useNavigation} from '@react-navigation/native';
-
+import Ionicons from 'react-native-vector-icons/Ionicons';
 import firestore from '@react-native-firebase/firestore';
 export default function Editprofile() {
   const [myProfile, setMyProfile] = useState(null);
@@ -64,7 +64,10 @@ export default function Editprofile() {
   }, [data]);
   return (
     <View style={{padding: 10}}>
-      <Text> {JSON.stringify(data)}</Text>
+      <TouchableOpacity onPress={() => navigation.navigate('Profile')}>
+        <Ionicons style={{padding: 10}} size={30} name="return-up-back" />
+      </TouchableOpacity>
+      {/* <Text> {JSON.stringify(data)}</Text> */}
       {/* <SimpleHome /> */}
       <TextInput
         style={styles.field}

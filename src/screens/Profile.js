@@ -65,7 +65,7 @@ const Profile = () => {
                   navigation.navigate('Home');
                 }}>
                 <Text style={styles.topIconLeft}>
-                  <Icon name="home" />
+                  <Icon size={30} name="home" />
                 </Text>
               </TouchableOpacity>
 
@@ -74,7 +74,7 @@ const Profile = () => {
                   navigation.navigate('EditProfile');
                 }}>
                 <Text style={styles.topIconRight}>
-                  <Icon name="edit" />
+                  <Icon size={30} name="edit" />
                 </Text>
               </TouchableOpacity>
             </View>
