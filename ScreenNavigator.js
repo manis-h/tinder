@@ -6,6 +6,7 @@ import LoginScreen from './src/screens/LoginScreen';
 import SimpleHome from './src/screens/SimpleHome';
 import useBearStore from './store/zustandStore';
 import Profile from './src/screens/Profile';
+import Editprofile from './src/screens/Editprofile';
 
 const Stack = createNativeStackNavigator();
 
@@ -21,11 +22,11 @@ const ScreenNavigator = () => {
       }}>
       {isLoggedIn?(
         <Stack.Group>
-          
       <Stack.Screen name="Profile" component={Profile} />    
-    
+        <Stack.Screen name="Home" component={HomeScreen} />    
       <Stack.Screen name="HomeTest" component={SimpleHome} />    
-      <Stack.Screen name="Home" component={HomeScreen} />    
+          
+    <Stack.Screen name='EditProfile' component={Editprofile}/>
         <Stack.Screen name="Chat" component={ChatScreen} />
       </Stack.Group>
       ):

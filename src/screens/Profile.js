@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useEffect, useState} from 'react';
 import styles from '../../assets/styles';
 
 import {
@@ -11,8 +11,19 @@ import {
 import ProfileItem from '../components/ProfileItem';
 import Icon from 'react-native-vector-icons/AntDesign';
 import Demo from '../../assets/data/demo.js';
+import useBearStore from '../../store/zustandStore';
+
+import { Modal } from 'react-native-paper';
+import { useNavigation } from '@react-navigation/native';
 
 const Profile = () => {
+  const [visible, setVisible] = useState(false);
+  const showModal = () => setVisible(true);
+  const hideModal = () => setVisible(false);
+  useEffect(()=>{
+    console.log(visible)
+  },[visible])
+  const containerStyle = {backgroundColor: 'white', padding: 20, };
   const {
     age,
     image,
@@ -25,7 +36,12 @@ const Profile = () => {
     name
   } = Demo[7];
 
+  const userProfile = useBearStore(state => state.userProfile);
+  console.log({userProfile})
+  
+  const navigation=useNavigation()
   return (
+    <>
     <ImageBackground
       source={require('../../assets/images/bg.png')}
       style={styles.bg}
@@ -39,7 +55,7 @@ const Profile = () => {
               </Text>
             </TouchableOpacity>
 
-            <TouchableOpacity>
+            <TouchableOpacity onPress={()=>{ navigation.navigate('EditProfile')}}>
               <Text style={styles.topIconRight}>
                 <Icon name="edit" />
               </Text>
@@ -49,7 +65,7 @@ const Profile = () => {
 
         <ProfileItem
           matches={match}
-          name={name}
+          name={userProfile?.name}
           age={age}
           location={location}
           info1={info1}
@@ -74,6 +90,8 @@ const Profile = () => {
         </View> */}
       </ScrollView>
     </ImageBackground>
+    
+    </>
   );
 };
 

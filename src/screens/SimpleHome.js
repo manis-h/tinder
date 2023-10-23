@@ -43,13 +43,13 @@ export function ShowAuthInfo() {
       {/* <Text color='brown' h5>{(userProfile?.uid)}</Text>
       <Text color='brown'>{JSON.stringify(userProfile)}</Text>   */}
 
-      <Button
+      <Button color='red'
         title={'send verification mail'}
         onPress={async () => {
           await userProfile.sendEmailVerification();
         }}
       />
-      <Button
+      <Button color={'red'}
         title={'Reload profile'}
         onPress={async () => {
           userProfile.reload();
@@ -96,7 +96,13 @@ export function ShowMySocialProfile() {
   );
 }
 
-export async function updateCreateProfile(uid, name = 'wolfieeeee', age = 28) {
+export async function updateCreateProfile({uid,
+  name,
+  age,
+  intrests,
+  lookingFor,
+  bio,
+  proffesion}) {
   if (!uid) return Alert.alert('need uid');
   if (!name) return Alert.alert('need name');
   if (!age) return Alert.alert('need age');
@@ -108,6 +114,10 @@ export async function updateCreateProfile(uid, name = 'wolfieeeee', age = 28) {
         uid,
         name,
         age,
+        intrests,
+        lookingFor,
+        bio,
+        proffesion
       },
       {merge: true},
     );
@@ -121,7 +131,7 @@ export default function SimpleHome() {
     <View
       style={{
         flex: 1,
-        backgroundColor: 'black',
+        backgroundColor: 'white',
       }}>
       <Text h1>Welcome</Text>
       {/* <ShowAuthInfo /> */}

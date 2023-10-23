@@ -22,7 +22,7 @@ const ProfileItem = ({
         </Text>
       </View> */}
 
-      <Text style={styles.name}>Manish Bohat</Text>
+      <Text style={styles.name}>{name}</Text>
 
       <Text style={styles.descriptionProfileItem}>
         {age} - {location}

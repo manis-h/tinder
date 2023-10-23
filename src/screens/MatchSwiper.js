@@ -151,7 +151,7 @@ export default MatchSwiper = () => {
   return (
     <ScrollView
       style={{
-        backgroundColor: 'black',
+        backgroundColor: 'white',
         minHeight: 50,
         width: '100%',
         maxHeight: '100%',
